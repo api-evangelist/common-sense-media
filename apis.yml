@@ -3,14 +3,14 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/common-sense-media/refs/heads/main/apis.yml
 name: Common Sense Media
 tags:
+  - Books
   - Media
-  - Non-Profit
-  - Reviews
-  - Ratings
   - Movies
+  - Non-Profit
+  - Ratings
+  - Reviews
   - Television
   - Video Games
-  - Books
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
@@ -28,8 +28,8 @@ apis:
     tags:
       - Media
       - Non-Profit
-      - Reviews
       - Ratings
+      - Reviews
     humanURL: https://www.commonsensemedia.org/developers/api-overview
     properties:
       - url: https://www.commonsensemedia.org/developers/api-overview
