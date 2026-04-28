@@ -1,0 +1,103 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "csm": "https://commonsensemedia.org/vocab/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Review": {
+      "@id": "schema:Review",
+      "@context": {
+        "id": "@id",
+        "url": "schema:url",
+        "title": "schema:name",
+        "mediaType": "csm:mediaType",
+        "ageRating": "csm:ageRating",
+        "ageRatingGroup": "csm:ageRatingGroup",
+        "stars": {
+          "@id": "schema:reviewRating",
+          "@type": "xsd:integer"
+        },
+        "oneLiner": "schema:headline",
+        "parentsNeedToKnow": "csm:parentsNeedToKnow",
+        "description": "schema:reviewBody",
+        "anyGood": "csm:anyGood",
+        "talkingPoints": "csm:talkingPoints",
+        "contentGrid": "csm:contentGrid",
+        "updated": {
+          "@id": "schema:dateModified",
+          "@type": "xsd:dateTime"
+        },
+        "langcode": "schema:inLanguage"
+      }
+    },
+
+    "Movie": {
+      "@id": "schema:Movie",
+      "@context": {
+        "cast": "schema:actor",
+        "directors": "schema:director",
+        "studios": "schema:productionCompany",
+        "genres": "schema:genre",
+        "rating": "schema:contentRating",
+        "length": "schema:duration"
+      }
+    },
+
+    "TVShow": {
+      "@id": "schema:TVSeries",
+      "@context": {
+        "cast": "schema:actor",
+        "networks": "schema:productionCompany",
+        "genres": "schema:genre",
+        "rating": "schema:contentRating"
+      }
+    },
+
+    "Book": {
+      "@id": "schema:Book",
+      "@context": {
+        "authors": "schema:author",
+        "illustrators": "schema:illustrator",
+        "publishers": "schema:publisher",
+        "genres": "schema:genre",
+        "length": "schema:numberOfPages"
+      }
+    },
+
+    "Game": {
+      "@id": "schema:VideoGame",
+      "@context": {
+        "developers": "schema:gamePlatform",
+        "genres": "schema:genre",
+        "rating": "schema:contentRating"
+      }
+    },
+
+    "App": {
+      "@id": "schema:SoftwareApplication",
+      "@context": {
+        "developers": "schema:author",
+        "genres": "schema:applicationCategory"
+      }
+    },
+
+    "Podcast": {
+      "@id": "schema:PodcastSeries",
+      "@context": {
+        "hosts": "schema:author",
+        "publishers": "schema:publisher",
+        "genres": "schema:genre"
+      }
+    },
+
+    "ContentGridItem": {
+      "@id": "csm:ContentGridItem",
+      "@context": {
+        "rating": "csm:gridRating",
+        "label": "schema:name",
+        "text": "schema:description"
+      }
+    }
+  }
+}

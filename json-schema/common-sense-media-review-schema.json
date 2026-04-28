@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/common-sense-media/refs/heads/main/json-schema/common-sense-media-review-schema.json",
+  "title": "Common Sense Media Review",
+  "description": "Schema for a single review returned from the Common Sense Media Reviews API v3.",
+  "type": "object",
+  "required": ["id", "mediaType", "title"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the review."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "title": {
+      "type": "string"
+    },
+    "mediaType": {
+      "type": "string",
+      "enum": ["app", "book", "game", "movie", "podcast", "tv", "website", "youtube"]
+    },
+    "langcode": {
+      "type": "string",
+      "enum": ["en", "es"],
+      "default": "en"
+    },
+    "ageRating": {
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 18,
+      "description": "Recommended minimum age."
+    },
+    "ageRatingGroup": {
+      "type": "string",
+      "enum": ["littleKids", "kids", "tweens", "teens"]
+    },
+    "stars": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Star rating out of five."
+    },
+    "oneLiner": {
+      "type": "string"
+    },
+    "anyGood": {
+      "type": "string"
+    },
+    "parentsNeedToKnow": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "talkingPoints": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "contentGrid": {
+      "type": "object",
+      "description": "Per-criterion content ratings.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "rating": { "type": "integer", "minimum": 0, "maximum": 5 },
+          "label": { "type": "string" },
+          "text": { "type": "string" }
+        }
+      }
+    },
+    "updated": {
+      "type": "integer",
+      "description": "Unix timestamp of last update."
+    }
+  }
+}

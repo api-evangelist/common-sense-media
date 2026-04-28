@@ -1,0 +1,79 @@
+# Naftiko capabilities profile for the Common Sense Media Reviews API (v3).
+# Capabilities reflect the read surface used by parenting apps, smart-TV
+# guides, and content-discovery products that surface age-rated reviews.
+provider: common-sense-media
+name: Common Sense Media Reviews
+description: >-
+  Read API for Common Sense Media's age-rated reviews and ratings of movies,
+  TV shows, books, video games, apps, podcasts, websites, and YouTube
+  channels. Used to embed age-appropriate review data into parenting,
+  education, and family-discovery experiences.
+capabilities:
+  - id: csm.reviews.list
+    name: List reviews
+    description: List reviews filtered by media type, age, stars, topics, or genres.
+    api: common-sense-media:common-sense-media-reviews-api
+    inputs:
+      - mediaType
+      - ageRating
+      - stars
+      - topics
+      - characterStrengths
+      - genres
+      - csmAward
+      - page
+      - size
+      - since
+      - langcode
+    outputs:
+      - reviews
+      - pagination
+
+  - id: csm.reviews.get
+    name: Retrieve a review
+    description: Retrieve a single review by its UUID identifier.
+    api: common-sense-media:common-sense-media-reviews-api
+    inputs:
+      - reviewId
+      - langcode
+    outputs:
+      - review
+
+  - id: csm.reviews.terms
+    name: List allowed values for a field
+    description: Look up vocabulary terms for awards, character strengths, genres, skills, subjects, or topics.
+    api: common-sense-media:common-sense-media-reviews-api
+    inputs:
+      - fieldName
+      - mediaType
+      - langcode
+    outputs:
+      - vocabulary
+
+  - id: csm.reviews.filter-by-age
+    name: Filter reviews by age range
+    description: Retrieve reviews appropriate for a specific recommended-age window.
+    api: common-sense-media:common-sense-media-reviews-api
+    inputs:
+      - ageRating[gte]
+      - ageRating[lte]
+    outputs:
+      - reviews
+
+  - id: csm.reviews.award-winners
+    name: List Common Sense Selection award winners
+    description: Retrieve reviews flagged with the Common Sense Selection award.
+    api: common-sense-media:common-sense-media-reviews-api
+    inputs:
+      - csmAward=true
+      - mediaType
+    outputs:
+      - reviews
+
+  - id: csm.system.ping
+    name: Health check
+    description: Confirm the API is reachable.
+    api: common-sense-media:common-sense-media-reviews-api
+    inputs: []
+    outputs:
+      - status
