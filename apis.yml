@@ -17,7 +17,7 @@ tags:
 type: Index
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
-x-type: company
+kind: company
 created: '2025-03-01'
 modified: '2026-04-26'
 position: Consumer
@@ -103,7 +103,7 @@ common:
   - type: PrivacyPolicy
     url: https://www.commonsensemedia.org/privacy-policy
   - url: json-ld/common-sense-media-context.jsonld
-    type: JSON-LD
+    type: JSONLD
   - url: json-schema/common-sense-media-review-schema.json
     type: JSONSchema
   - url: rules/common-sense-media-rules.yml
