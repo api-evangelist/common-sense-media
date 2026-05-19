@@ -1,0 +1,195 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Common Sense Media Reviews API — reviews
+  description: 'Common Sense Media Reviews API — reviews. 3 operations. Lead operation: List reviews. Self-contained Naftiko
+    capability covering one Common Sense Media business surface.'
+  tags:
+  - Common Sense Media
+  - reviews
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    COMMON_SENSE_MEDIA_API_KEY: COMMON_SENSE_MEDIA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: reviews-reviews
+    baseUri: https://api.commonsense.org/api/v3
+    description: Common Sense Media Reviews API — reviews business capability. Self-contained, no shared references.
+    resources:
+    - name: reviews
+      path: /reviews
+      operations:
+      - name: reviews
+        method: GET
+        description: List reviews
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: ageRating
+          in: query
+          type: object
+          description: Filter based on the recommended age rating, exact value or range.
+        - name: csmAward
+          in: query
+          type: boolean
+          description: Filter for items with the Common Sense Selection award.
+        - name: characterStrengths
+          in: query
+          type: array
+          description: Filter based on a review's Character Strengths (UUID list, OR semantics).
+        - name: genres
+          in: query
+          type: string
+          description: Filter based on a review's mediaType-specific genre.
+        - name: stars
+          in: query
+          type: object
+          description: Filter based on the star rating, exact value or range.
+        - name: topics
+          in: query
+          type: array
+          description: Filter based on a review's Topics (UUID list, OR semantics).
+    - name: reviews-terms-fieldName
+      path: /reviews/terms/{fieldName}
+      operations:
+      - name: allowedvaluesbyfield
+        method: GET
+        description: Get allowed values for a field
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: fieldName
+          in: path
+          type: string
+          description: The field to look up vocabulary terms for.
+          required: true
+    - name: reviews-reviewId
+      path: /reviews/{reviewId}
+      operations:
+      - name: reviewbyid
+        method: GET
+        description: Get a single review
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: reviewId
+          in: path
+          type: string
+          description: The unique identifier of the review.
+          required: true
+    authentication:
+      type: apikey
+      key: X-Api-Key
+      value: '{{env.COMMON_SENSE_MEDIA_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: reviews-reviews-rest
+    port: 8080
+    description: REST adapter for Common Sense Media Reviews API — reviews. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/reviews
+      name: reviews
+      description: REST surface for reviews.
+      operations:
+      - method: GET
+        name: reviews
+        description: List reviews
+        call: reviews-reviews.reviews
+        with:
+          ageRating: rest.ageRating
+          csmAward: rest.csmAward
+          characterStrengths: rest.characterStrengths
+          genres: rest.genres
+          stars: rest.stars
+          topics: rest.topics
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reviews/terms/{fieldname}
+      name: reviews-terms-fieldname
+      description: REST surface for reviews-terms-fieldName.
+      operations:
+      - method: GET
+        name: allowedvaluesbyfield
+        description: Get allowed values for a field
+        call: reviews-reviews.allowedvaluesbyfield
+        with:
+          fieldName: rest.fieldName
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reviews/{reviewid}
+      name: reviews-reviewid
+      description: REST surface for reviews-reviewId.
+      operations:
+      - method: GET
+        name: reviewbyid
+        description: Get a single review
+        call: reviews-reviews.reviewbyid
+        with:
+          reviewId: rest.reviewId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: reviews-reviews-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Common Sense Media Reviews API — reviews. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-reviews
+      description: List reviews
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reviews-reviews.reviews
+      with:
+        ageRating: tools.ageRating
+        csmAward: tools.csmAward
+        characterStrengths: tools.characterStrengths
+        genres: tools.genres
+        stars: tools.stars
+        topics: tools.topics
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-allowed-values-field
+      description: Get allowed values for a field
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reviews-reviews.allowedvaluesbyfield
+      with:
+        fieldName: tools.fieldName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-review
+      description: Get a single review
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reviews-reviews.reviewbyid
+      with:
+        reviewId: tools.reviewId
+      outputParameters:
+      - type: object
+        mapping: $.

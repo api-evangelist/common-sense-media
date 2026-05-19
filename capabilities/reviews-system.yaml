@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Common Sense Media Reviews API — system
+  description: 'Common Sense Media Reviews API — system. 1 operations. Lead operation: Health check. Self-contained Naftiko
+    capability covering one Common Sense Media business surface.'
+  tags:
+  - Common Sense Media
+  - system
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    COMMON_SENSE_MEDIA_API_KEY: COMMON_SENSE_MEDIA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: reviews-system
+    baseUri: https://api.commonsense.org/api/v3
+    description: Common Sense Media Reviews API — system business capability. Self-contained, no shared references.
+    resources:
+    - name: system-ping
+      path: /system/ping
+      operations:
+      - name: ping
+        method: GET
+        description: Health check
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-Api-Key
+      value: '{{env.COMMON_SENSE_MEDIA_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: reviews-system-rest
+    port: 8080
+    description: REST adapter for Common Sense Media Reviews API — system. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/system/ping
+      name: system-ping
+      description: REST surface for system-ping.
+      operations:
+      - method: GET
+        name: ping
+        description: Health check
+        call: reviews-system.ping
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: reviews-system-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Common Sense Media Reviews API — system. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: health-check
+      description: Health check
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reviews-system.ping
+      outputParameters:
+      - type: object
+        mapping: $.
