@@ -51,9 +51,9 @@ apis:
       type: ImplementationGuide
     - url: openapi/common-sense-media-reviews-api-openapi.yml
       type: OpenAPI
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/reviews-reviews.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/reviews-system.yaml
     description: JSON REST API exposing Common Sense Media's reviews and ratings catalog. Each review includes recommended age,
       age-rating group (littleKids/kids/tweens/teens), star rating, content grid (educational, message, role-model, diversity,
@@ -105,7 +105,7 @@ common:
   - url: rules/common-sense-media-rules.yml
     type: Spectral
   - url: capabilities/common-sense-media-reviews-capabilities.yml
-    type: NaftikoCapabilities
+    type: X-NaftikoCapabilities
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
