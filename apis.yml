@@ -78,6 +78,10 @@ apis:
     - Surfacing Common Sense Selection award lists
     - Filtering streaming or library catalogs by recommended age
 common:
+  - type: DomainSecurity
+    url: security/common-sense-media-domain-security.yml
+  - type: Authentication
+    url: authentication/common-sense-media-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/commonsense-org
   - type: LinkedIn
