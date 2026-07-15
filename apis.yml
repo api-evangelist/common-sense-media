@@ -78,6 +78,8 @@ apis:
     - Surfacing Common Sense Selection award lists
     - Filtering streaming or library catalogs by recommended age
 common:
+  - type: AgenticAccess
+    url: agentic-access/common-sense-media-agentic-access.yml
   - type: DomainSecurity
     url: security/common-sense-media-domain-security.yml
   - type: Authentication
