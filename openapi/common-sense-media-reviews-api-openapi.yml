@@ -1,109 +1,92 @@
 openapi: 3.1.0
 info:
-  title: Common Sense Media Reviews API
-  description: >-
-    The Common Sense Media Reviews API (v3) provides programmatic access to
-    Common Sense Media's age-rated reviews and ratings of movies, TV shows,
-    books, video games, apps, podcasts, websites, and YouTube channels. Each
-    review includes a recommended age rating, star rating, content grid
-    (educational value, positive messages, role models, diversity, violence,
-    sex, language, consumerism, and drugs), parents-need-to-know guidance,
-    talking points, and product metadata. API access is granted via a
-    business partnership agreement; clients authenticate with a partner-
-    issued x-api-key header.
-  version: '3.0.0'
+  title: Common Sense Media reviews API
+  description: The Common Sense Media Reviews API (v3) provides programmatic access to Common Sense Media's age-rated reviews and ratings of movies, TV shows, books, video games, apps, podcasts, websites, and YouTube channels. Each review includes a recommended age rating, star rating, content grid (educational value, positive messages, role models, diversity, violence, sex, language, consumerism, and drugs), parents-need-to-know guidance, talking points, and product metadata. API access is granted via a business partnership agreement; clients authenticate with a partner- issued x-api-key header.
+  version: 3.0.0
   contact:
     name: Business Partner Program
     url: https://commonsense.my.site.com/membersupport/s/contactsupport
-externalDocs:
-  description: Developer Center
-  url: https://www.commonsensemedia.org/developers
 servers:
-  - url: https://api.commonsense.org/api/v3
-    description: Main API server
-tags:
-  - name: reviews
-    description: Common Sense Media reviews and ratings.
-  - name: system
-    description: System and health endpoints.
+- url: https://api.commonsense.org/api/v3
+  description: Main API server
 security:
-  - ApiKey: []
+- ApiKey: []
+tags:
+- name: reviews
+  description: Common Sense Media reviews and ratings.
 paths:
   /reviews:
     get:
       operationId: reviews
       summary: List reviews
-      description: >-
-        Get a set of reviews, filtered by selection criteria such as media
-        type, recommended age rating, star rating, character strengths,
-        topics, or genres.
+      description: Get a set of reviews, filtered by selection criteria such as media type, recommended age rating, star rating, character strengths, topics, or genres.
       tags:
-        - reviews
+      - reviews
       parameters:
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/size'
-        - $ref: '#/components/parameters/since'
-        - $ref: '#/components/parameters/langcode'
-        - $ref: '#/components/parameters/ids'
-        - name: ageRating
-          in: query
-          description: Filter based on the recommended age rating, exact value or range.
-          style: deepObject
-          explode: true
-          schema:
-            type: object
-            properties:
-              gte:
-                type: integer
-                minimum: 2
-                maximum: 18
-              lte:
-                type: integer
-                minimum: 2
-                maximum: 18
-        - $ref: '#/components/parameters/mediaType'
-        - name: csmAward
-          in: query
-          description: Filter for items with the Common Sense Selection award.
-          schema:
-            type: boolean
-        - name: characterStrengths
-          in: query
-          description: Filter based on a review's Character Strengths (UUID list, OR semantics).
-          schema:
-            type: array
-            items:
-              type: string
-              format: uuid
-        - name: genres
-          in: query
-          description: Filter based on a review's mediaType-specific genre.
-          schema:
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/size'
+      - $ref: '#/components/parameters/since'
+      - $ref: '#/components/parameters/langcode'
+      - $ref: '#/components/parameters/ids'
+      - name: ageRating
+        in: query
+        description: Filter based on the recommended age rating, exact value or range.
+        style: deepObject
+        explode: true
+        schema:
+          type: object
+          properties:
+            gte:
+              type: integer
+              minimum: 2
+              maximum: 18
+            lte:
+              type: integer
+              minimum: 2
+              maximum: 18
+      - $ref: '#/components/parameters/mediaType'
+      - name: csmAward
+        in: query
+        description: Filter for items with the Common Sense Selection award.
+        schema:
+          type: boolean
+      - name: characterStrengths
+        in: query
+        description: Filter based on a review's Character Strengths (UUID list, OR semantics).
+        schema:
+          type: array
+          items:
             type: string
-        - name: stars
-          in: query
-          description: Filter based on the star rating, exact value or range.
-          style: deepObject
-          explode: true
-          schema:
-            type: object
-            properties:
-              gte:
-                type: integer
-                minimum: 1
-                maximum: 5
-              lte:
-                type: integer
-                minimum: 1
-                maximum: 5
-        - name: topics
-          in: query
-          description: Filter based on a review's Topics (UUID list, OR semantics).
-          schema:
-            type: array
-            items:
-              type: string
-              format: uuid
+            format: uuid
+      - name: genres
+        in: query
+        description: Filter based on a review's mediaType-specific genre.
+        schema:
+          type: string
+      - name: stars
+        in: query
+        description: Filter based on the star rating, exact value or range.
+        style: deepObject
+        explode: true
+        schema:
+          type: object
+          properties:
+            gte:
+              type: integer
+              minimum: 1
+              maximum: 5
+            lte:
+              type: integer
+              minimum: 1
+              maximum: 5
+      - name: topics
+        in: query
+        description: Filter based on a review's Topics (UUID list, OR semantics).
+        schema:
+          type: array
+          items:
+            type: string
+            format: uuid
       responses:
         '200':
           description: List of matched reviews.
@@ -111,22 +94,22 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/BaseResponse'
-                  - type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          $ref: '#/components/schemas/Review'
-                      pagination:
-                        $ref: '#/components/schemas/Pagination'
+                - $ref: '#/components/schemas/BaseResponse'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/Review'
+                    pagination:
+                      $ref: '#/components/schemas/Pagination'
         '400':
           $ref: '#/components/responses/InvalidRequestError'
         '401':
           $ref: '#/components/responses/NotAuthorizedError'
         '422':
           $ref: '#/components/responses/UnprocessableEntityError'
-        '5XX':
+        5XX:
           $ref: '#/components/responses/ServerError'
   /reviews/{reviewId}:
     get:
@@ -134,16 +117,16 @@ paths:
       summary: Get a single review
       description: Retrieve a single review by its UUID identifier.
       tags:
-        - reviews
+      - reviews
       parameters:
-        - $ref: '#/components/parameters/langcode'
-        - name: reviewId
-          in: path
-          required: true
-          description: The unique identifier of the review.
-          schema:
-            type: string
-            format: uuid
+      - $ref: '#/components/parameters/langcode'
+      - name: reviewId
+        in: path
+        required: true
+        description: The unique identifier of the review.
+        schema:
+          type: string
+          format: uuid
       responses:
         '200':
           description: The review corresponding to the provided reviewId.
@@ -151,11 +134,11 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/BaseResponse'
-                  - type: object
-                    properties:
-                      data:
-                        $ref: '#/components/schemas/Review'
+                - $ref: '#/components/schemas/BaseResponse'
+                - type: object
+                  properties:
+                    data:
+                      $ref: '#/components/schemas/Review'
         '403':
           $ref: '#/components/responses/NotAuthorizedError'
         '404':
@@ -164,29 +147,25 @@ paths:
     get:
       operationId: allowedValuesByField
       summary: Get allowed values for a field
-      description: >-
-        Get possible values (vocabulary terms) for a filterable field such
-        as awards, characterStrengths, genres, skills, subjects, or topics.
-        When retrieving genres or awards, the mediaType query parameter is
-        required.
+      description: Get possible values (vocabulary terms) for a filterable field such as awards, characterStrengths, genres, skills, subjects, or topics. When retrieving genres or awards, the mediaType query parameter is required.
       tags:
-        - reviews
+      - reviews
       parameters:
-        - name: fieldName
-          in: path
-          required: true
-          description: The field to look up vocabulary terms for.
-          schema:
-            type: string
-            enum:
-              - awards
-              - characterStrengths
-              - genres
-              - skills
-              - subjects
-              - topics
-        - $ref: '#/components/parameters/langcode'
-        - $ref: '#/components/parameters/mediaType'
+      - name: fieldName
+        in: path
+        required: true
+        description: The field to look up vocabulary terms for.
+        schema:
+          type: string
+          enum:
+          - awards
+          - characterStrengths
+          - genres
+          - skills
+          - subjects
+          - topics
+      - $ref: '#/components/parameters/langcode'
+      - $ref: '#/components/parameters/mediaType'
       responses:
         '200':
           description: The list of allowed values for the provided fieldName.
@@ -194,82 +173,9 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: '#/components/schemas/BaseResponse'
-                  - $ref: '#/components/schemas/VocabularyNested'
-  /system/ping:
-    get:
-      operationId: ping
-      summary: Health check
-      description: Simple status check confirming the API is reachable.
-      tags:
-        - system
-      responses:
-        '200':
-          description: The API is up.
+                - $ref: '#/components/schemas/BaseResponse'
+                - $ref: '#/components/schemas/VocabularyNested'
 components:
-  securitySchemes:
-    ApiKey:
-      type: apiKey
-      in: header
-      name: X-Api-Key
-  parameters:
-    ids:
-      name: id
-      in: query
-      description: Filter based on a list of item IDs (OR search).
-      schema:
-        type: array
-        items:
-          type: string
-          format: uuid
-    langcode:
-      name: langcode
-      in: query
-      description: Language code for items, if available.
-      schema:
-        type: string
-        enum:
-          - en
-          - es
-        default: en
-    page:
-      name: page
-      in: query
-      description: Page number of items to return.
-      schema:
-        type: integer
-        format: int32
-        default: 0
-    since:
-      name: since
-      in: query
-      description: Limit to items updated since the given Unix timestamp.
-      schema:
-        type: integer
-    size:
-      name: size
-      in: query
-      description: Number of items per page of results.
-      schema:
-        type: integer
-        default: 100
-        minimum: 1
-        maximum: 100
-    mediaType:
-      name: mediaType
-      in: query
-      description: Filter based on the media type of the review's product.
-      schema:
-        type: string
-        enum:
-          - app
-          - book
-          - game
-          - movie
-          - podcast
-          - tv
-          - website
-          - youtube
   responses:
     InvalidRequestError:
       description: One or more of the request parameters are invalid.
@@ -277,8 +183,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotAuthorizedError:
-      description: The requester is unauthorized.
+    UnprocessableEntityError:
+      description: One or more of the request parameters are invalid.
       content:
         application/json:
           schema:
@@ -295,13 +201,124 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    UnprocessableEntityError:
-      description: One or more of the request parameters are invalid.
+    NotAuthorizedError:
+      description: The requester is unauthorized.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    ContentGridItem:
+      type: object
+      properties:
+        rating:
+          type: integer
+          minimum: 0
+          maximum: 5
+        label:
+          type: string
+        text:
+          type: string
+    VocabularyNested:
+      description: A nested list of tags keyed by id.
+      type: object
+      additionalProperties: true
+    Review:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        updated:
+          type: integer
+        url:
+          type: string
+          format: uri
+        langcode:
+          type: string
+          default: en
+          enum:
+          - en
+          - es
+        mediaType:
+          type: string
+          enum:
+          - app
+          - book
+          - game
+          - movie
+          - podcast
+          - tv
+          - website
+          - youtube
+        title:
+          type: string
+        ageRating:
+          type: integer
+          minimum: 2
+          maximum: 18
+        ageRatingGroup:
+          type: string
+          enum:
+          - littleKids
+          - kids
+          - tweens
+          - teens
+        stars:
+          type: integer
+          minimum: 1
+          maximum: 5
+        oneLiner:
+          type: string
+        anyGood:
+          type: string
+        parentsNeedToKnow:
+          type: string
+        description:
+          type: string
+        talkingPoints:
+          type: array
+          items:
+            type: string
+        contentGrid:
+          type: object
+          description: 'Content grid items: educational, message, roleModel, diversity, violence, sex, language, consumerism, drugs.'
+          additionalProperties:
+            $ref: '#/components/schemas/ContentGridItem'
+    Pagination:
+      type: object
+      properties:
+        totalResults:
+          type: integer
+          minimum: 0
+        page:
+          type: integer
+          minimum: 0
+        size:
+          type: integer
+          minimum: 0
+        totalPages:
+          type: integer
+          minimum: 0
+        nextPage:
+          type: string
+          format: uri
+        previousPage:
+          type: string
+          format: uri
+    Error:
+      type: object
+      required:
+      - message
+      properties:
+        code:
+          type: number
+        type:
+          type: string
+        message:
+          type: string
+        detail:
+          type: string
     BaseResponse:
       type: object
       properties:
@@ -324,116 +341,69 @@ components:
               type: integer
             message:
               type: string
-    Pagination:
-      type: object
-      properties:
-        totalResults:
-          type: integer
-          minimum: 0
-        page:
-          type: integer
-          minimum: 0
-        size:
-          type: integer
-          minimum: 0
-        totalPages:
-          type: integer
-          minimum: 0
-        nextPage:
-          type: string
-          format: uri
-        previousPage:
-          type: string
-          format: uri
-    Review:
-      type: object
-      properties:
-        id:
+  parameters:
+    mediaType:
+      name: mediaType
+      in: query
+      description: Filter based on the media type of the review's product.
+      schema:
+        type: string
+        enum:
+        - app
+        - book
+        - game
+        - movie
+        - podcast
+        - tv
+        - website
+        - youtube
+    langcode:
+      name: langcode
+      in: query
+      description: Language code for items, if available.
+      schema:
+        type: string
+        enum:
+        - en
+        - es
+        default: en
+    size:
+      name: size
+      in: query
+      description: Number of items per page of results.
+      schema:
+        type: integer
+        default: 100
+        minimum: 1
+        maximum: 100
+    since:
+      name: since
+      in: query
+      description: Limit to items updated since the given Unix timestamp.
+      schema:
+        type: integer
+    ids:
+      name: id
+      in: query
+      description: Filter based on a list of item IDs (OR search).
+      schema:
+        type: array
+        items:
           type: string
           format: uuid
-        updated:
-          type: integer
-        url:
-          type: string
-          format: uri
-        langcode:
-          type: string
-          default: en
-          enum:
-            - en
-            - es
-        mediaType:
-          type: string
-          enum:
-            - app
-            - book
-            - game
-            - movie
-            - podcast
-            - tv
-            - website
-            - youtube
-        title:
-          type: string
-        ageRating:
-          type: integer
-          minimum: 2
-          maximum: 18
-        ageRatingGroup:
-          type: string
-          enum:
-            - littleKids
-            - kids
-            - tweens
-            - teens
-        stars:
-          type: integer
-          minimum: 1
-          maximum: 5
-        oneLiner:
-          type: string
-        anyGood:
-          type: string
-        parentsNeedToKnow:
-          type: string
-        description:
-          type: string
-        talkingPoints:
-          type: array
-          items:
-            type: string
-        contentGrid:
-          type: object
-          description: >-
-            Content grid items: educational, message, roleModel, diversity,
-            violence, sex, language, consumerism, drugs.
-          additionalProperties:
-            $ref: '#/components/schemas/ContentGridItem'
-    ContentGridItem:
-      type: object
-      properties:
-        rating:
-          type: integer
-          minimum: 0
-          maximum: 5
-        label:
-          type: string
-        text:
-          type: string
-    VocabularyNested:
-      description: A nested list of tags keyed by id.
-      type: object
-      additionalProperties: true
-    Error:
-      type: object
-      required:
-        - message
-      properties:
-        code:
-          type: number
-        type:
-          type: string
-        message:
-          type: string
-        detail:
-          type: string
+    page:
+      name: page
+      in: query
+      description: Page number of items to return.
+      schema:
+        type: integer
+        format: int32
+        default: 0
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+externalDocs:
+  description: Developer Center
+  url: https://www.commonsensemedia.org/developers

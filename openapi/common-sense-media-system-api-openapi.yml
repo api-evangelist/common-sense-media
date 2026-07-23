@@ -1,0 +1,36 @@
+openapi: 3.1.0
+info:
+  title: Common Sense Media reviews system API
+  description: The Common Sense Media Reviews API (v3) provides programmatic access to Common Sense Media's age-rated reviews and ratings of movies, TV shows, books, video games, apps, podcasts, websites, and YouTube channels. Each review includes a recommended age rating, star rating, content grid (educational value, positive messages, role models, diversity, violence, sex, language, consumerism, and drugs), parents-need-to-know guidance, talking points, and product metadata. API access is granted via a business partnership agreement; clients authenticate with a partner- issued x-api-key header.
+  version: 3.0.0
+  contact:
+    name: Business Partner Program
+    url: https://commonsense.my.site.com/membersupport/s/contactsupport
+servers:
+- url: https://api.commonsense.org/api/v3
+  description: Main API server
+security:
+- ApiKey: []
+tags:
+- name: system
+  description: System and health endpoints.
+paths:
+  /system/ping:
+    get:
+      operationId: ping
+      summary: Health check
+      description: Simple status check confirming the API is reachable.
+      tags:
+      - system
+      responses:
+        '200':
+          description: The API is up.
+components:
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+externalDocs:
+  description: Developer Center
+  url: https://www.commonsensemedia.org/developers
