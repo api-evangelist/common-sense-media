@@ -14,7 +14,20 @@ tags:
   - Video Games
   - YouTube
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/common-sense-media.png
 access: 3rd-Party
 kind: company
 created: '2025-03-01'
@@ -26,57 +39,69 @@ description: Common Sense Media is a nonprofit organization providing independen
   Common Sense's Business Partner Program. The API is used by parenting apps, smart-TV guides, education platforms, and family-
   discovery products to surface age-appropriate guidance and the Common Sense Selection award.
 apis:
-  - aid: common-sense-media:common-sense-media-reviews-api
-    name: Common Sense Media Reviews API
-    tags:
-    - Apps
-    - Books
-    - Media
-    - Movies
-    - Ratings
-    - Reviews
-    - Television
-    - Video Games
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://api.commonsense.org/api/v3
-    humanURL: https://www.commonsensemedia.org/developers
-    properties:
-    - url: https://www.commonsensemedia.org/developers/api-overview
-      type: Documentation
-    - url: https://www.commonsensemedia.org/developers/api/v3
-      type: APIv3Overview
-    - url: https://api.commonsense.org/docs/v3/
-      type: SwaggerUI
-    - url: https://www.commonsensemedia.org/developers/api/implementation
-      type: ImplementationGuide
-    - url: openapi/common-sense-media-reviews-api-openapi.yml
-      type: OpenAPI
-    - type: X-NaftikoCapability
-      url: capabilities/reviews-reviews.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/reviews-system.yaml
-    description: JSON REST API exposing Common Sense Media's reviews and ratings catalog. Each review includes recommended age,
-      age-rating group (littleKids/kids/tweens/teens), star rating, content grid (educational, message, role-model, diversity,
-      violence, sex, language, consumerism, drugs), parents-need-to-know guidance, talking points, and product metadata. Clients
-      filter by media type, age range, star range, character strengths, topics, genres, and the Common Sense Selection award.
-      Authentication uses a partner-issued x-api-key header. The API is GET-only, HTTPS-only, rate-limited to 100 unique requests
-      per minute, and content is refreshed at most hourly.
-    x-features:
-    - x-api-key header authentication
-    - GET-only, HTTPS-only access
-    - Filter by mediaType (app, book, game, movie, podcast, tv, website, youtube)
-    - Age-range and star-range deepObject filters
-    - Filter by character strengths, topics, genres
-    - Common Sense Selection award filter (csmAward=true)
-    - Vocabulary lookup endpoint for filterable fields
-    - English and Spanish (en, es) language responses
-    - Rate limited to 100 unique requests per minute
-    x-use-cases:
-    - Embedding age-rated reviews in parenting and family apps
-    - Powering smart-TV guides with content advisories
-    - Driving content discovery in education platforms
-    - Surfacing Common Sense Selection award lists
-    - Filtering streaming or library catalogs by recommended age
+- aid: common-sense-media:common-sense-media-reviews-api
+  name: Common Sense Media Reviews API
+  tags:
+  - Apps
+  - Books
+  - Media
+  - Movies
+  - Ratings
+  - Reviews
+  - Television
+  - Video Games
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  baseURL: https://api.commonsense.org/api/v3
+  humanURL: https://www.commonsensemedia.org/developers
+  properties:
+  - url: https://www.commonsensemedia.org/developers/api-overview
+    type: Documentation
+  - url: https://www.commonsensemedia.org/developers/api/v3
+    type: APIv3Overview
+  - url: https://api.commonsense.org/docs/v3/
+    type: SwaggerUI
+  - url: https://www.commonsensemedia.org/developers/api/implementation
+    type: ImplementationGuide
+  - url: openapi/common-sense-media-reviews-api-openapi.yml
+    type: OpenAPI
+  - type: X-NaftikoCapability
+    url: capabilities/reviews-reviews.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/reviews-system.yaml
+  description: >-
+    JSON REST API exposing Common Sense Media's reviews and ratings catalog. Each review includes recommended
+    age, age-rating group (littleKids/kids/tweens/teens), star rating, content grid (educational, message,
+    role-model, diversity, violence, sex, language, consumerism, drugs), parents-need-to-know guidance,
+    talking points, and product metadata. Clients filter by media type, age range, star range, character
+    strengths, topics, genres, and the Common Sense Selection award. Authentication uses a partner-issued
+    x-api-key header. The API is GET-only, HTTPS-only, rate-limited to 100 unique requests per minute,
+    and content is refreshed at most hourly.
+  x-features:
+  - x-api-key header authentication
+  - GET-only, HTTPS-only access
+  - Filter by mediaType (app, book, game, movie, podcast, tv, website, youtube)
+  - Age-range and star-range deepObject filters
+  - Filter by character strengths, topics, genres
+  - Common Sense Selection award filter (csmAward=true)
+  - Vocabulary lookup endpoint for filterable fields
+  - English and Spanish (en, es) language responses
+  - Rate limited to 100 unique requests per minute
+  x-use-cases:
+  - Embedding age-rated reviews in parenting and family apps
+  - Powering smart-TV guides with content advisories
+  - Driving content discovery in education platforms
+  - Surfacing Common Sense Selection award lists
+  - Filtering streaming or library catalogs by recommended age
+- aid: common-sense-media:common-sense-media-system-api
+  name: Common Sense Media system API
+  description: System and health endpoints.
+  humanURL: https://www.commonsensemedia.org/developers
+  baseURL: https://api.commonsense.org/api/v3
+  tags:
+  - system
+  properties:
+  - type: OpenAPI
+    url: openapi/common-sense-media-system-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/common-sense-media-agentic-access.yml
