@@ -1,0 +1,16 @@
+{
+  "provider": "common-sense-media",
+  "sources": [
+    "common-sense-media-reviews-api-openapi.yml",
+    "common-sense-media-system-api-openapi.yml"
+  ],
+  "outputs": [
+    "common-sense-media-reviews-api-openapi.yml",
+    "common-sense-media-system-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
