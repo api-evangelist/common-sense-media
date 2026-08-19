@@ -1,0 +1,119 @@
+{
+  "item": [
+    {
+      "id": "c79c4a3e-d066-4644-9b5f-0b9d80648887",
+      "name": "system",
+      "description": {
+        "content": "System and health endpoints.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8d2310dc-ae3a-46a2-a621-ee19cc11e221",
+          "name": "Health check",
+          "request": {
+            "name": "Health check",
+            "description": {
+              "content": "Simple status check confirming the API is reachable.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "system",
+                "ping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "245d2ffd-07bf-4296-9263-4ae849cea629",
+              "name": "The API is up.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "system",
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.commonsense.org/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Api-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "41dfa053-1a9e-4802-8863-5d47db82ccd0",
+    "name": "Common Sense Media reviews system API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Common Sense Media Reviews API (v3) provides programmatic access to Common Sense Media's age-rated reviews and ratings of movies, TV shows, books, video games, apps, podcasts, websites, and YouTube channels. Each review includes a recommended age rating, star rating, content grid (educational value, positive messages, role models, diversity, violence, sex, language, consumerism, and drugs), parents-need-to-know guidance, talking points, and product metadata. API access is granted via a business partnership agreement; clients authenticate with a partner- issued x-api-key header.\n\nContact Support:\n Name: Business Partner Program",
+      "type": "text/plain"
+    }
+  }
+}
