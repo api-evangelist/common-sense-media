@@ -2,6 +2,18 @@ aid: common-sense-media
 url: https://raw.githubusercontent.com/api-evangelist/common-sense-media/refs/heads/main/apis.yml
 name: Common Sense Media
 tags:
+  - Application
+  - Books
+  - Media
+  - Movies
+  - Non-Profit
+  - Podcasts
+  - Ratings
+  - Reviews
+  - Television
+  - Video Games
+  - YouTube
+tags_raw:
   - Apps
   - Books
   - Media
@@ -42,6 +54,15 @@ apis:
 - aid: common-sense-media:common-sense-media-reviews-api
   name: Common Sense Media Reviews API
   tags:
+  - Application
+  - Books
+  - Media
+  - Movies
+  - Ratings
+  - Reviews
+  - Television
+  - Video Games
+  tags_raw:
   - Apps
   - Books
   - Media
@@ -94,6 +115,8 @@ apis:
   humanURL: https://www.commonsensemedia.org/developers
   baseURL: https://api.commonsense.org/api/v3
   tags:
+  - System
+  tags_raw:
   - system
   properties:
   - type: OpenAPI
