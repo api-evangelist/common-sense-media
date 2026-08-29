@@ -1,0 +1,28 @@
+slug: common-sense-media
+provider: Common Sense Media
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Media, Entertainment & Telecom Content
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: reviews
+  spec_file: common-sense-media-reviews-api-openapi.yml
+  capability_id: BC-3780.10
+  capability_id_l1: BC-3780
+  capability_name: Content Classification & Rating Management
+  confidence: 0.75
+  evidence: age-rated reviews and ratings of movies, TV shows, books, video games ... Each review includes
+    a recommended age rating, star rating, content grid (educational value ... violence, sex, language
+    ...)
+  reason: The operations serve age ratings and content-suitability grids for audiovisual and game titles,
+    which is content classification and rating information. Some ambiguity remains because this is third-party
+    editorial rating distribution rather than the enterprise's own submission/self-classification workflow,
+    hence moderate confidence.
