@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Common Sense Media reviews API
-  description: The Common Sense Media Reviews API (v3) provides programmatic access to Common Sense Media's age-rated reviews and ratings of movies, TV shows, books, video games, apps, podcasts, websites, and YouTube channels. Each review includes a recommended age rating, star rating, content grid (educational value, positive messages, role models, diversity, violence, sex, language, consumerism, and drugs), parents-need-to-know guidance, talking points, and product metadata. API access is granted via a business partnership agreement; clients authenticate with a partner- issued x-api-key header.
+  title: Common Sense Media Reviews API
+  description: The Common Sense Media Reviews API (v3) provides programmatic access to Common Sense Media's age-rated reviews and ratings of movies, TV shows, books, video games, apps, podcasts, websites, and YouTube channels.
   version: 3.0.0
   contact:
     name: Business Partner Program
@@ -12,7 +12,7 @@ servers:
 security:
 - ApiKey: []
 tags:
-- name: reviews
+- name: Reviews
   description: Common Sense Media reviews and ratings.
 paths:
   /reviews:
@@ -21,7 +21,7 @@ paths:
       summary: List reviews
       description: Get a set of reviews, filtered by selection criteria such as media type, recommended age rating, star rating, character strengths, topics, or genres.
       tags:
-      - reviews
+      - Reviews
       parameters:
       - $ref: '#/components/parameters/page'
       - $ref: '#/components/parameters/size'
@@ -117,7 +117,7 @@ paths:
       summary: Get a single review
       description: Retrieve a single review by its UUID identifier.
       tags:
-      - reviews
+      - Reviews
       parameters:
       - $ref: '#/components/parameters/langcode'
       - name: reviewId
@@ -149,7 +149,7 @@ paths:
       summary: Get allowed values for a field
       description: Get possible values (vocabulary terms) for a filterable field such as awards, characterStrengths, genres, skills, subjects, or topics. When retrieving genres or awards, the mediaType query parameter is required.
       tags:
-      - reviews
+      - Reviews
       parameters:
       - name: fieldName
         in: path
@@ -176,38 +176,20 @@ paths:
                 - $ref: '#/components/schemas/BaseResponse'
                 - $ref: '#/components/schemas/VocabularyNested'
 components:
-  responses:
-    InvalidRequestError:
-      description: One or more of the request parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    UnprocessableEntityError:
-      description: One or more of the request parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFoundError:
-      description: The requested item does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ServerError:
-      description: An unexpected server error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotAuthorizedError:
-      description: The requester is unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      required:
+      - message
+      properties:
+        code:
+          type: number
+        type:
+          type: string
+        message:
+          type: string
+        detail:
+          type: string
     ContentGridItem:
       type: object
       properties:
@@ -219,6 +201,27 @@ components:
           type: string
         text:
           type: string
+    Pagination:
+      type: object
+      properties:
+        totalResults:
+          type: integer
+          minimum: 0
+        page:
+          type: integer
+          minimum: 0
+        size:
+          type: integer
+          minimum: 0
+        totalPages:
+          type: integer
+          minimum: 0
+        nextPage:
+          type: string
+          format: uri
+        previousPage:
+          type: string
+          format: uri
     VocabularyNested:
       description: A nested list of tags keyed by id.
       type: object
@@ -285,40 +288,6 @@ components:
           description: 'Content grid items: educational, message, roleModel, diversity, violence, sex, language, consumerism, drugs.'
           additionalProperties:
             $ref: '#/components/schemas/ContentGridItem'
-    Pagination:
-      type: object
-      properties:
-        totalResults:
-          type: integer
-          minimum: 0
-        page:
-          type: integer
-          minimum: 0
-        size:
-          type: integer
-          minimum: 0
-        totalPages:
-          type: integer
-          minimum: 0
-        nextPage:
-          type: string
-          format: uri
-        previousPage:
-          type: string
-          format: uri
-    Error:
-      type: object
-      required:
-      - message
-      properties:
-        code:
-          type: number
-        type:
-          type: string
-        message:
-          type: string
-        detail:
-          type: string
     BaseResponse:
       type: object
       properties:
@@ -342,21 +311,6 @@ components:
             message:
               type: string
   parameters:
-    mediaType:
-      name: mediaType
-      in: query
-      description: Filter based on the media type of the review's product.
-      schema:
-        type: string
-        enum:
-        - app
-        - book
-        - game
-        - movie
-        - podcast
-        - tv
-        - website
-        - youtube
     langcode:
       name: langcode
       in: query
@@ -376,12 +330,14 @@ components:
         default: 100
         minimum: 1
         maximum: 100
-    since:
-      name: since
+    page:
+      name: page
       in: query
-      description: Limit to items updated since the given Unix timestamp.
+      description: Page number of items to return.
       schema:
         type: integer
+        format: int32
+        default: 0
     ids:
       name: id
       in: query
@@ -391,14 +347,58 @@ components:
         items:
           type: string
           format: uuid
-    page:
-      name: page
+    mediaType:
+      name: mediaType
       in: query
-      description: Page number of items to return.
+      description: Filter based on the media type of the review's product.
+      schema:
+        type: string
+        enum:
+        - app
+        - book
+        - game
+        - movie
+        - podcast
+        - tv
+        - website
+        - youtube
+    since:
+      name: since
+      in: query
+      description: Limit to items updated since the given Unix timestamp.
       schema:
         type: integer
-        format: int32
-        default: 0
+  responses:
+    ServerError:
+      description: An unexpected server error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFoundError:
+      description: The requested item does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntityError:
+      description: One or more of the request parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotAuthorizedError:
+      description: The requester is unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InvalidRequestError:
+      description: One or more of the request parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKey:
       type: apiKey
