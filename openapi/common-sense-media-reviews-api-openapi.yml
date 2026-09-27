@@ -176,6 +176,64 @@ paths:
                 - $ref: '#/components/schemas/BaseResponse'
                 - $ref: '#/components/schemas/VocabularyNested'
 components:
+  parameters:
+    size:
+      name: size
+      in: query
+      description: Number of items per page of results.
+      schema:
+        type: integer
+        default: 100
+        minimum: 1
+        maximum: 100
+    ids:
+      name: id
+      in: query
+      description: Filter based on a list of item IDs (OR search).
+      schema:
+        type: array
+        items:
+          type: string
+          format: uuid
+    since:
+      name: since
+      in: query
+      description: Limit to items updated since the given Unix timestamp.
+      schema:
+        type: integer
+    mediaType:
+      name: mediaType
+      in: query
+      description: Filter based on the media type of the review's product.
+      schema:
+        type: string
+        enum:
+        - app
+        - book
+        - game
+        - movie
+        - podcast
+        - tv
+        - website
+        - youtube
+    page:
+      name: page
+      in: query
+      description: Page number of items to return.
+      schema:
+        type: integer
+        format: int32
+        default: 0
+    langcode:
+      name: langcode
+      in: query
+      description: Language code for items, if available.
+      schema:
+        type: string
+        enum:
+        - en
+        - es
+        default: en
   schemas:
     Error:
       type: object
@@ -189,17 +247,6 @@ components:
         message:
           type: string
         detail:
-          type: string
-    ContentGridItem:
-      type: object
-      properties:
-        rating:
-          type: integer
-          minimum: 0
-          maximum: 5
-        label:
-          type: string
-        text:
           type: string
     Pagination:
       type: object
@@ -222,10 +269,17 @@ components:
         previousPage:
           type: string
           format: uri
-    VocabularyNested:
-      description: A nested list of tags keyed by id.
+    ContentGridItem:
       type: object
-      additionalProperties: true
+      properties:
+        rating:
+          type: integer
+          minimum: 0
+          maximum: 5
+        label:
+          type: string
+        text:
+          type: string
     Review:
       type: object
       properties:
@@ -288,6 +342,10 @@ components:
           description: 'Content grid items: educational, message, roleModel, diversity, violence, sex, language, consumerism, drugs.'
           additionalProperties:
             $ref: '#/components/schemas/ContentGridItem'
+    VocabularyNested:
+      description: A nested list of tags keyed by id.
+      type: object
+      additionalProperties: true
     BaseResponse:
       type: object
       properties:
@@ -310,79 +368,9 @@ components:
               type: integer
             message:
               type: string
-  parameters:
-    langcode:
-      name: langcode
-      in: query
-      description: Language code for items, if available.
-      schema:
-        type: string
-        enum:
-        - en
-        - es
-        default: en
-    size:
-      name: size
-      in: query
-      description: Number of items per page of results.
-      schema:
-        type: integer
-        default: 100
-        minimum: 1
-        maximum: 100
-    page:
-      name: page
-      in: query
-      description: Page number of items to return.
-      schema:
-        type: integer
-        format: int32
-        default: 0
-    ids:
-      name: id
-      in: query
-      description: Filter based on a list of item IDs (OR search).
-      schema:
-        type: array
-        items:
-          type: string
-          format: uuid
-    mediaType:
-      name: mediaType
-      in: query
-      description: Filter based on the media type of the review's product.
-      schema:
-        type: string
-        enum:
-        - app
-        - book
-        - game
-        - movie
-        - podcast
-        - tv
-        - website
-        - youtube
-    since:
-      name: since
-      in: query
-      description: Limit to items updated since the given Unix timestamp.
-      schema:
-        type: integer
   responses:
     ServerError:
       description: An unexpected server error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFoundError:
-      description: The requested item does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    UnprocessableEntityError:
-      description: One or more of the request parameters are invalid.
       content:
         application/json:
           schema:
@@ -393,7 +381,19 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFoundError:
+      description: The requested item does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     InvalidRequestError:
+      description: One or more of the request parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntityError:
       description: One or more of the request parameters are invalid.
       content:
         application/json:

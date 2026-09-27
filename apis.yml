@@ -122,7 +122,7 @@ apis:
   - Surfacing Common Sense Selection award lists
   - Filtering streaming or library catalogs by recommended age
 - aid: common-sense-media:common-sense-media-system-api
-  name: Common Sense Media system API
+  name: Common Sense Media System API
   description: System and health endpoints.
   humanURL: https://www.commonsensemedia.org/developers
   baseURL: https://api.commonsense.org/api/v3
