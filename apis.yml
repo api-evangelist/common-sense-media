@@ -7,7 +7,6 @@ tags:
   - Media
   - Movies
   - Non-Profit
-  - Podcasts
   - Ratings
   - Reviews
   - Television
@@ -19,7 +18,6 @@ tags_raw:
   - Media
   - Movies
   - Non-Profit
-  - Podcasts
   - Ratings
   - Reviews
   - Television
@@ -173,3 +171,5 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 specificationVersion: '0.23'
+x-tags-removed:
+- Podcasts
