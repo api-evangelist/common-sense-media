@@ -177,18 +177,37 @@ paths:
                 - $ref: '#/components/schemas/VocabularyNested'
 components:
   schemas:
-    Error:
+    Pagination:
       type: object
-      required:
-      - message
       properties:
-        code:
-          type: number
-        type:
+        totalResults:
+          type: integer
+          minimum: 0
+        page:
+          type: integer
+          minimum: 0
+        size:
+          type: integer
+          minimum: 0
+        totalPages:
+          type: integer
+          minimum: 0
+        nextPage:
           type: string
-        message:
+          format: uri
+        previousPage:
           type: string
-        detail:
+          format: uri
+    ContentGridItem:
+      type: object
+      properties:
+        rating:
+          type: integer
+          minimum: 0
+          maximum: 5
+        label:
+          type: string
+        text:
           type: string
     Review:
       type: object
@@ -252,17 +271,10 @@ components:
           description: 'Content grid items: educational, message, roleModel, diversity, violence, sex, language, consumerism, drugs.'
           additionalProperties:
             $ref: '#/components/schemas/ContentGridItem'
-    ContentGridItem:
+    VocabularyNested:
+      description: A nested list of tags keyed by id.
       type: object
-      properties:
-        rating:
-          type: integer
-          minimum: 0
-          maximum: 5
-        label:
-          type: string
-        text:
-          type: string
+      additionalProperties: true
     BaseResponse:
       type: object
       properties:
@@ -285,62 +297,19 @@ components:
               type: integer
             message:
               type: string
-    VocabularyNested:
-      description: A nested list of tags keyed by id.
+    Error:
       type: object
-      additionalProperties: true
-    Pagination:
-      type: object
+      required:
+      - message
       properties:
-        totalResults:
-          type: integer
-          minimum: 0
-        page:
-          type: integer
-          minimum: 0
-        size:
-          type: integer
-          minimum: 0
-        totalPages:
-          type: integer
-          minimum: 0
-        nextPage:
+        code:
+          type: number
+        type:
           type: string
-          format: uri
-        previousPage:
+        message:
           type: string
-          format: uri
-  responses:
-    ServerError:
-      description: An unexpected server error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    InvalidRequestError:
-      description: One or more of the request parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotAuthorizedError:
-      description: The requester is unauthorized.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    UnprocessableEntityError:
-      description: One or more of the request parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFoundError:
-      description: The requested item does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        detail:
+          type: string
   parameters:
     size:
       name: size
@@ -351,23 +320,6 @@ components:
         default: 100
         minimum: 1
         maximum: 100
-    page:
-      name: page
-      in: query
-      description: Page number of items to return.
-      schema:
-        type: integer
-        format: int32
-        default: 0
-    ids:
-      name: id
-      in: query
-      description: Filter based on a list of item IDs (OR search).
-      schema:
-        type: array
-        items:
-          type: string
-          format: uuid
     langcode:
       name: langcode
       in: query
@@ -384,6 +336,14 @@ components:
       description: Limit to items updated since the given Unix timestamp.
       schema:
         type: integer
+    page:
+      name: page
+      in: query
+      description: Page number of items to return.
+      schema:
+        type: integer
+        format: int32
+        default: 0
     mediaType:
       name: mediaType
       in: query
@@ -399,6 +359,46 @@ components:
         - tv
         - website
         - youtube
+    ids:
+      name: id
+      in: query
+      description: Filter based on a list of item IDs (OR search).
+      schema:
+        type: array
+        items:
+          type: string
+          format: uuid
+  responses:
+    ServerError:
+      description: An unexpected server error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotAuthorizedError:
+      description: The requester is unauthorized.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InvalidRequestError:
+      description: One or more of the request parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    UnprocessableEntityError:
+      description: One or more of the request parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFoundError:
+      description: The requested item does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKey:
       type: apiKey
