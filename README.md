@@ -1,4 +1,4 @@
-# Common Sense Media (common-sense-media)
+# Common Sense Media
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,74 +64,137 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Common Sense Media is a nonprofit organization providing independent, age-rated reviews and ratings of movies, TV shows, books, video games, apps, podcasts, websites, and YouTube channels. The Common Sense Media Reviews API (v3) exposes this catalog via a partner-keyed REST surface hosted at api.commonsense.org/api/v3, with the partnership granted through Common Sense's Business Partner Program. The API is used by parenting apps, smart-TV guides, education platforms, and family-discovery products to surface age-appropriate guidance and the Common Sense Selection award.
+Common Sense Media is a nonprofit organization providing independent, age-rated reviews and ratings of movies, TV shows, books, video games, apps, podcasts, websites, and YouTube channels. The Common Sense Media Reviews API (v3) exposes this catalog via a partner-keyed REST surface hosted at api.commonsense.org/api/v3, with the partnership granted through Common Sense's Business Partner Program. The API is used by parenting apps, smart-TV guides, education platforms, and family- discovery products to surface age-appropriate guidance and the Common Sense Selection award.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/common-sense-media/refs/heads/main/apis.yml)
+**Areas:** Application · Books · Media · Movies · Non-Profit · Ratings · Reviews · Television · Video Games · YouTube
 
-## Scope
+## Common Sense Media on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
-- **x-type:** company
+Everything profiled for Common Sense Media is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/common-sense-media/](https://apis.io/providers/common-sense-media/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (2)
 
-- Apps
-- Books
-- Media
-- Movies
-- Non-Profit
-- Podcasts
-- Ratings
-- Reviews
-- Television
-- Video Games
-- YouTube
+- [Common Sense Media Reviews API](https://apis.io/apis/common-sense-media/common-sense-media-reviews-api/) — JSON REST API exposing Common Sense Media's reviews and ratings catalog. Each review includes recommended age, age-rating group…
+- [Common Sense Media System API](https://apis.io/apis/common-sense-media/common-sense-media-system-api/) — System and health endpoints.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-03-01
-- **Modified:** 2026-04-26
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Common Sense Media Reviews API
-JSON REST API exposing Common Sense Media's reviews and ratings catalog. Each review includes recommended age, age-rating group, star rating, content grid (educational, message, role-model, diversity, violence, sex, language, consumerism, drugs), parents-need-to-know guidance, talking points, and product metadata. Clients filter by media type, age range, star range, character strengths, topics, genres, and the Common Sense Selection award.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-**Base URL:** `https://api.commonsense.org/api/v3`
+- [Common Sense Media Agentic Access](https://apis.io/agentic-access/common-sense-media/common-sense-media-agentic-access/)
 
-**Human URL:** [https://www.commonsensemedia.org/developers](https://www.commonsensemedia.org/developers)
+#### JSON Schema (1)
 
-#### Tags
+The data models the API reads and writes.
 
-- Apps, Books, Media, Movies, Ratings, Reviews, Television, Video Games
+- [Common Sense Media Review](https://apis.io/schemas/common-sense-media/common-sense-media-review/)
 
-#### Properties
+#### JSON-LD (1)
 
-- [Documentation](https://www.commonsensemedia.org/developers/api-overview)
-- [API v3 Overview](https://www.commonsensemedia.org/developers/api/v3)
-- [Swagger UI](https://api.commonsense.org/docs/v3/)
-- [Implementation Guide](https://www.commonsensemedia.org/developers/api/implementation)
-- [OpenAPI](openapi/common-sense-media-reviews-api-openapi.yml)
+Linked-data contexts for the provider's vocabulary.
 
-## Common Properties
+- [Common Sense Media Context](https://apis.io/jsonld/common-sense-media/common-sense-media-context/)
+
+#### Collections (1)
+
+Postman and Open Collection request collections.
+
+- [Common Sense Media reviews system API](https://apis.io/collections/common-sense-media/open-common-sense-media-system-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Common Sense Media — jsonschema rules](https://apis.io/rules/common-sense-media/common-sense-media-jsonschema-spectral-rules/)
+- [Common Sense Media API Rules](https://apis.io/rules/common-sense-media/common-sense-media-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Common Sense Media Authentication](https://apis.io/security/common-sense-media/common-sense-media-authentication/)
+- [Common Sense Media Domain Security](https://apis.io/security/common-sense-media/common-sense-media-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Common Sense Media Plans Pricing](https://apis.io/plans/common-sense-media/common-sense-media-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Common Sense Media Rate Limits](https://apis.io/rate-limits/common-sense-media/common-sense-media-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Common Sense Media Finops](https://apis.io/finops/common-sense-media/common-sense-media-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.commonsensemedia.org/)
-- [Developer Center](https://www.commonsensemedia.org/developers)
-- [API Overview](https://www.commonsensemedia.org/developers/api-overview)
-- [API v3](https://www.commonsensemedia.org/developers/api/v3)
-- [Swagger UI](https://api.commonsense.org/docs/v3/)
-- [Implementation Guide](https://www.commonsensemedia.org/developers/api/implementation)
-- [Partner Program Contact](https://commonsense.my.site.com/membersupport/s/contactsupport)
-- [Privacy Policy](https://www.commonsensemedia.org/privacy-policy)
-- [JSON-LD Context](json-ld/common-sense-media-context.jsonld)
-- [Review JSON Schema](json-schema/common-sense-media-review-schema.json)
-- [Spectral Ruleset](rules/common-sense-media-rules.yml)
-- [Naftiko Capabilities](capabilities/common-sense-media-reviews-capabilities.yml)
+- [Blog](https://www.commonsensemedia.org/articles)
+- [Privacy policy](https://www.commonsensemedia.org/privacy-policy)
+- [GitHub](https://github.com/commonsense-org)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
+**Kin Score 29.8** — thin · rubric 0.24.0 · scored 2026-10-17
 
-**Email:** kin@apievangelist.com
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 54.5 |
+| Contract governance | 13.6 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 7.9 |
+
+**Agent readiness 20.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/common-sense-media/](https://apis.io/providers/common-sense-media/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Common Sense Media: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/common-sense-media/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
